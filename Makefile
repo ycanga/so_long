@@ -1,4 +1,4 @@
-SRCS			=	deneme.c
+SRCS			=	so_long.c
 										
 
 OBJS			= $(SRCS:.c=.o)
