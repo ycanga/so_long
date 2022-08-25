@@ -1,35 +1,142 @@
-SRCS			=	so_long.c
-										
+CFLAGS = -Wall -Wextra -Werror -I./mlx -g
+LFLAGS = -framework AppKit -framework OpenGL -L./mlx -lmlx
+MLX = ./mlx/libmlx.a
+GNL = $(wildcard gnl/*c)
+GNLOBJS = $(GNL:.c=.o)
+SRCS = main.c	map_read.c
+OBJS = $(SRCS:.c=.o)
+NAME = so_long
 
-OBJS			= $(SRCS:.c=.o)
+all : $(MLX) $(NAME)
 
-CC				= gcc #-fsanitize=address -g
-RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror
+$(MLX) :
+	make bonus -sC ./ft_printf/libft
+	make -sC ./ft_printf
+	make -sC ./mlx
 
-NAME			= so_long
-LIB				= ./mlx/libmlx.a
+$(NAME) : $(OBJS) $(GNLOBJS)
+	gcc -g $(OBJS) $(GNLOBJS) $(LFLAGS) ./ft_printf/libft/libft.a ./ft_printf/libftprintf.a -o $(NAME)
 
-all:			$(LIB) $(NAME)
-
-$(LIB) : 
-	make -C ./mlx
-
-$(NAME):		$(OBJS)
-				$(CC) $(OBJS) -framework OpenGL -framework AppKit -o $(NAME) $(LIB)
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-				$(RM) $(OBJS)
+	rm -rf $(OBJS) $(NAME)
 
-fclean:			clean
-				$(RM) $(NAME)
+fclean:
+	rm -rf $(OBJS) $(NAME)
+	rm -rf ./gnl/*.o
+	make clean -C ./mlx
+	make fclean -C ./ft_printf/libft
+	make fclean -C ./ft_printf
 
-re:				fclean $(NAME)
+norm:
+	norminette ./*.c
 
-%.o: %.c
-	 $(CC) $(CFLAGS) -I./mlx -c $< -o $@
+re : fclean all
 
-norm:			
-				norminette *.[ch]
+test:
+	./so_long maps/map1.ber
 
-.PHONY:			all clean fclean re bonus
+coffee:
+	@clear
+	@echo ""
+	@echo "                   ("
+	@echo "	                     )     ("
+	@echo "               ___...(-------)-....___"
+	@echo '           .-""       )    (          ""-.'
+	@echo "      .-''''|-._             )         _.-|"
+	@echo '     /  .--.|   `""---...........---""`   |'
+	@echo "    /  /    |                             |"
+	@echo "    |  |    |                             |"
+	@echo "     \  \   |                             |"
+	@echo "      '\ '\ |                             |"
+	@echo "        '\ '|                             |"
+	@echo "        _/ /\                             /"
+	@echo "       (__/  \                           /"
+	@echo '    _..---""` \                         /`""---.._'
+	@echo " .-'           \                       /          '-."
+	@echo ":               '-.__             __.-'              :"
+	@echo ':                  ) ""---...---"" (                :'
+	@echo "\'._                '"--...___...--"'              _.'"
+	@echo '   \""--..__                              __..--""/'
+	@echo "     '._     """----.....______.....----"""         _.'"
+	@echo '         ""--..,,_____            _____,,..--"""'''
+	@echo '                      """------"""'
+	@sleep 0.5
+	@clear
+	@echo ""
+	@echo "                 ("
+	@echo "	                  )      ("
+	@echo "               ___..(.------)--....___"
+	@echo '           .-""       )   (           ""-.'
+	@echo "      .-''''|-._      (       )        _.-|"
+	@echo '     /  .--.|   `""---...........---""`   |'
+	@echo "    /  /    |                             |"
+	@echo "    |  |    |                             |"
+	@echo "     \  \   |                             |"
+	@echo "      '\ '\ |                             |"
+	@echo "        '\ '|                             |"
+	@echo "        _/ /\                             /"
+	@echo "       (__/  \                           /"
+	@echo '    _..---""` \                         /`""---.._'
+	@echo " .-'           \                       /          '-."
+	@echo ":               '-.__             __.-'              :"
+	@echo ':                  ) ""---...---"" (                :'
+	@echo "\'._                '"--...___...--"'              _.'"
+	@echo '   \""--..__                              __..--""/'
+	@echo "     '._     """----.....______.....----"""         _.'"
+	@echo '         ""--..,,_____            _____,,..--"""'''
+	@echo '                      """------"""'
+	@sleep 0.5
+	@clear
+	@echo ""
+	@echo "               ("
+	@echo "	                  )     ("
+	@echo "               ___..(.------)--....___"
+	@echo '           .-""      )    (           ""-.'
+	@echo "      .-''''|-._      (       )        _.-|"
+	@echo '     /  .--.|   `""---...........---""`   |'
+	@echo "    /  /    |                             |"
+	@echo "    |  |    |                             |"
+	@echo "     \  \   |                             |"
+	@echo "      '\ '\ |                             |"
+	@echo "        '\ '|                             |"
+	@echo "        _/ /\                             /"
+	@echo "       (__/  \                           /"
+	@echo '    _..---""` \                         /`""---.._'
+	@echo " .-'           \                       /          '-."
+	@echo ":               '-.__             __.-'              :"
+	@echo ':                  ) ""---...---"" (                :'
+	@echo "\'._                '"--...___...--"'              _.'"
+	@echo '   \""--..__                              __..--""/'
+	@echo "     '._     """----.....______.....----"""         _.'"
+	@echo '         ""--..,,_____            _____,,..--"""'''
+	@echo '                      """------"""'
+	@sleep 0.5
+	@clear
+	@echo ""
+	@echo "             (         ) "
+	@echo "	              )        ("
+	@echo "               ___)...----)----....___"
+	@echo '           .-""      )    (           ""-.'
+	@echo "      .-''''|-._      (       )        _.-|"
+	@echo '     /  .--.|   `""---...........---""`   |'
+	@echo "    /  /    |                             |"
+	@echo "    |  |    |                             |"
+	@echo "     \  \   |                             |"
+	@echo "      '\ '\ |                             |"
+	@echo "        '\ '|                             |"
+	@echo "        _/ /\                             /"
+	@echo "       (__/  \                           /"
+	@echo '    _..---""` \                         /`""---.._'
+	@echo " .-'           \                       /          '-."
+	@echo ":               '-.__             __.-'              :"
+	@echo ':                  ) ""---...---"" (                :'
+	@echo "\'._                '"--...___...--"'              _.'"
+	@echo '   \""--..__                              __..--""/'
+	@echo "     '._     """----.....______.....----"""         _.'"
+	@echo '         ""--..,,_____            _____,,..--"""'''
+	@echo '                      """------"""'
+
+.PHONY: clean fclean re norm

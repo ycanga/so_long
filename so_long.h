@@ -5,14 +5,58 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/20 18:36:10 by ycanga            #+#    #+#             */
-/*   Updated: 2022/08/20 18:37:10 by ycanga           ###   ########.fr       */
+/*   Created: 2022/08/25 17:58:57 by ycanga            #+#    #+#             */
+/*   Updated: 2022/08/25 19:30:35 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-char	*get_next_line(int fd);
+# include "./ft_printf/ft_printf.h"
+# include "./ft_printf/libft/libft.h"
+# include "./mlx/mlx.h"
+# include "./gnl/get_next_line.h"
+
+typedef struct s_map
+{
+	int		width;
+	int		height;
+	char	**map;
+	int		collect;
+	int		exit;
+	int		player;
+	
+}t_map;
+
+typedef	struct s_mlx
+{
+	void	*chr;
+	void	*l_chr;
+	void	*r_chr;
+	void	*b_chr;
+	void	*ext;
+	void	*wall;
+	void	*bg;
+	void	*coll;
+	int		size;
+	int		x;
+	int		y;
+}t_mlx;
+
+typedef struct s_win
+{
+	t_map	*mapp;
+	t_mlx	*mlxx;
+	int		width;
+	int		height;
+	void	*mlx;
+	void	*win;
+}t_win;
+
+t_win *win;
+
+void	read_map(char *maps);
+void	control_argv();
 
 #endif
