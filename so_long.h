@@ -6,7 +6,7 @@
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:58:57 by ycanga            #+#    #+#             */
-/*   Updated: 2022/08/25 19:30:35 by ycanga           ###   ########.fr       */
+/*   Updated: 2022/08/28 22:25:08 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct s_map
 	int		collect;
 	int		exit;
 	int		player;
+	int		map_true;
+	int		fd;
 	
 }t_map;
 
@@ -57,6 +59,8 @@ typedef struct s_win
 t_win *win;
 
 void	read_map(char *maps);
-void	control_argv();
+void	wall_control(void);
+void	map_wall_control(void);
+void	map_argv(void);
 
 #endif
