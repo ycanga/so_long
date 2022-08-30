@@ -6,7 +6,7 @@
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:58:57 by ycanga            #+#    #+#             */
-/*   Updated: 2022/08/28 22:25:08 by ycanga           ###   ########.fr       */
+/*   Updated: 2022/08/29 17:02:47 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_map
 	int		player;
 	int		map_true;
 	int		fd;
+	char	**map_control;
 	
 }t_map;
 

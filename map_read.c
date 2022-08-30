@@ -5,41 +5,69 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/25 18:34:00 by ycanga            #+#    #+#             */
-/*   Updated: 2022/08/29 03:38:14 by ycanga           ###   ########.fr       */
+/*   Created: 2022/08/29 16:10:38 by ycanga            #+#    #+#             */
+/*   Updated: 2022/08/30 09:57:53 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	map_argv_control(void)
-{
-	int		index;
-	int		player;
-	int		exit;
-	int		last_char;
-	int		map_height;
-	char	**map_char;
+// void	map_contents(char **map_char)
+// {
+// 	int		i;
+// 	int		j;
 
-	index = 0;
-	player = 0;
-	exit = 0;
-	map_height = win->mapp->height;
-	last_char = win->mapp->width - 1;
-	map_char = win->mapp->map;
-	ft_printf("%d", win->mapp->height);
-	while (last_char > 0)
-	{
-		if (index != map_height)
-		{
-			if (map_char[][last_char] == 'E' )
-			break; // düzeltme
-		}
-		
-		last_char--;
-	}
-	ft_printf("%d\n%d\n", player, exit);
-}
+// 	i = 0;
+// 	j = 0;
+// 	while (map_char[i][j])
+// 	{
+// 		if (map_char[i][j] == 'E')
+// 			win->mapp->exit +=1;
+// 		if (map_char[i][j] == 'P')
+// 			win->mapp->exit +=1;
+// 		if (map_char[i][j] == 'C')
+// 			win->mapp->exit +=1;
+// 		if (map_char[i][j] == 'E')
+// 			win->mapp->exit +=1;
+// 		if (map_char[i][j] == 'E')
+// 			win->mapp->exit +=1;
+// 	}
+	
+// }
+
+// void	map_argv_control(void)
+// {
+// 	int		i;
+// 	int		j;
+// 	int		last_char;
+// 	int		map_height;
+// 	char	**map_char;
+
+// 	i = 1;
+// 	j = 1;
+// 	map_height = win->mapp->height;
+// 	last_char = win->mapp->width - 1;
+// 	map_char = win->mapp->map;
+// 	ft_printf("%d\n", map_height);
+// 	ft_printf("%d\n", last_char);
+// 	while (i < map_height)
+// 	{
+// 		while (map_char[i][j])
+// 		{
+// 			if (map_char[i][j] && j != last_char - 1)
+// 				map_contents(map_char);
+// 			else
+// 				ft_printf("Error !!!");
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// } 
+
+// void	map_lenght(char **map_char)
+// {
+	
+// }
 
 void	map_wall_control(void)
 {
@@ -62,7 +90,16 @@ void	map_wall_control(void)
 		}
 		last_char--;
 	}
-	map_argv_control();
+	// int i = 0;
+	// while (map_char[i])
+	// {
+	// 	ft_printf("%s\n", map_char[i]);
+	// 	i++;
+	// }
+	
+	// map_lenght(map_char);
+	
+	// map_argv_control();
 }
 
 void	map_argv(void)
@@ -77,16 +114,27 @@ void	map_argv(void)
 	line = get_next_line(fd);
 	if (line == 0)
 		ft_printf("Invalid map size");
-	win->mapp->width = ft_strlen(line)-1;
+	win->mapp->width = ft_strlen(line) - 1;
 	count = 0;
 	while (line)
 	{
+		// ft_printf("%d\n", (int)ft_strlen(&line[i]));
+		// ft_printf("%s", &line[i]);
+		// ft_printf("%d\n", win->mapp->width);
 		win->mapp->map[i] = ft_calloc(win->mapp->width, 1);
-		ft_strlcpy(win->mapp->map[i], line, win->mapp->width +1);
-		i++;
+		ft_strlcpy(win->mapp->map[i], line, (int)ft_strlen(line) + 1);
+		ft_printf("%s\n", win->mapp->map[i]) ;
+		ft_printf("%d\n", (int)ft_strlen(win->mapp->map[i]) - 1);
+		if ((int)ft_strlen(win->mapp->map[i] ) - 1 != win->mapp->width)
+		{
+			ft_printf("satır kısa\n");
+			break;
+		}
+		
 		free(line);
 		line = get_next_line(fd);
 		count++;
+		i++;
 	}
 	win->mapp->height = count;
 	wall_control();
@@ -115,7 +163,8 @@ void	wall_control(void)
 			break;
 		}
 	}
-	map_wall_control();
+	if(win->mapp->map_true == 1)
+		map_wall_control();
 }
 
 void	read_map(char *maps)
