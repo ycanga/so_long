@@ -6,7 +6,7 @@
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:10:38 by ycanga            #+#    #+#             */
-/*   Updated: 2022/09/02 16:36:27 by ycanga           ###   ########.fr       */
+/*   Updated: 2022/09/02 16:52:14 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	map_argv(t_win *win)
 	}
 	win->mapp->height = count;
 	wall_control(win);
-	// ft_printf("map control: %d", win->mapp->map_true);
 	free(line);
 }
 
