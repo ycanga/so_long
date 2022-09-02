@@ -6,7 +6,7 @@
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:37:01 by ycanga            #+#    #+#             */
-/*   Updated: 2022/08/28 19:41:54 by ycanga           ###   ########.fr       */
+/*   Updated: 2022/09/02 01:59:37 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	main(int ac, char **av)
 {
+	t_win *win;
 	int		true;
 
 	true = 0;
@@ -22,7 +23,7 @@ int	main(int ac, char **av)
 		win = ft_calloc(sizeof(t_win), 1);
 		win->mapp = ft_calloc(sizeof(t_map), 1);
 		win->mapp->map = &av[1];
-		read_map(av[1]);
+		read_map(av[1], win);
 	}
 	else
 		ft_printf("Argument Error !!!");

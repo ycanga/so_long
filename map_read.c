@@ -6,70 +6,42 @@
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:10:38 by ycanga            #+#    #+#             */
-/*   Updated: 2022/08/30 09:57:53 by ycanga           ###   ########.fr       */
+/*   Updated: 2022/09/02 16:36:27 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// void	map_contents(char **map_char)
-// {
-// 	int		i;
-// 	int		j;
+void	map_argv_control(t_win *win)
+{
+	int		i;
+	int		j;
+	char	**map;
 
-// 	i = 0;
-// 	j = 0;
-// 	while (map_char[i][j])
-// 	{
-// 		if (map_char[i][j] == 'E')
-// 			win->mapp->exit +=1;
-// 		if (map_char[i][j] == 'P')
-// 			win->mapp->exit +=1;
-// 		if (map_char[i][j] == 'C')
-// 			win->mapp->exit +=1;
-// 		if (map_char[i][j] == 'E')
-// 			win->mapp->exit +=1;
-// 		if (map_char[i][j] == 'E')
-// 			win->mapp->exit +=1;
-// 	}
-	
-// }
+	map = win->mapp->map;
+	i = 0;
+	while (i < win->mapp->height)
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'E')
+				win->mapp->exit +=1;
+			if (map[i][j] == 'P')
+				win->mapp->player +=1;
+			if (map[i][j] == 'C')
+				win->mapp->collect +=1;
+			
+			j++;
+		}
+		i++;
+	}
+	ft_printf("exit: %d ", win->mapp->exit);
+	ft_printf("player: %d ", win->mapp->player);
+	ft_printf("collect: %d ", win->mapp->collect);
+} 
 
-// void	map_argv_control(void)
-// {
-// 	int		i;
-// 	int		j;
-// 	int		last_char;
-// 	int		map_height;
-// 	char	**map_char;
-
-// 	i = 1;
-// 	j = 1;
-// 	map_height = win->mapp->height;
-// 	last_char = win->mapp->width - 1;
-// 	map_char = win->mapp->map;
-// 	ft_printf("%d\n", map_height);
-// 	ft_printf("%d\n", last_char);
-// 	while (i < map_height)
-// 	{
-// 		while (map_char[i][j])
-// 		{
-// 			if (map_char[i][j] && j != last_char - 1)
-// 				map_contents(map_char);
-// 			else
-// 				ft_printf("Error !!!");
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// } 
-
-// void	map_lenght(char **map_char)
-// {
-	
-// }
-
-void	map_wall_control(void)
+void	map_wall_control(t_win *win)
 {
 	int		last_char;
 	int		map_height;
@@ -90,59 +62,42 @@ void	map_wall_control(void)
 		}
 		last_char--;
 	}
-	// int i = 0;
-	// while (map_char[i])
-	// {
-	// 	ft_printf("%s\n", map_char[i]);
-	// 	i++;
-	// }
-	
-	// map_lenght(map_char);
-	
-	// map_argv_control();
+	map_argv_control(win);
 }
 
-void	map_argv(void)
+void	map_argv(t_win *win)
 {
 	int		count;
 	char	*line;
-	int		fd;
 	int		i;
 
 	i = 0;
-	fd = win->mapp->fd;
-	line = get_next_line(fd);
+	line = get_next_line(win->mapp->fd);
 	if (line == 0)
 		ft_printf("Invalid map size");
 	win->mapp->width = ft_strlen(line) - 1;
 	count = 0;
 	while (line)
 	{
-		// ft_printf("%d\n", (int)ft_strlen(&line[i]));
-		// ft_printf("%s", &line[i]);
-		// ft_printf("%d\n", win->mapp->width);
 		win->mapp->map[i] = ft_calloc(win->mapp->width, 1);
 		ft_strlcpy(win->mapp->map[i], line, (int)ft_strlen(line) + 1);
-		ft_printf("%s\n", win->mapp->map[i]) ;
-		ft_printf("%d\n", (int)ft_strlen(win->mapp->map[i]) - 1);
 		if ((int)ft_strlen(win->mapp->map[i] ) - 1 != win->mapp->width)
 		{
-			ft_printf("satır kısa\n");
+			ft_printf("Map Error.\n");
 			break;
 		}
-		
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(win->mapp->fd);
 		count++;
 		i++;
 	}
 	win->mapp->height = count;
-	wall_control();
-	ft_printf("map control: %d", win->mapp->map_true);
+	wall_control(win);
+	// ft_printf("map control: %d", win->mapp->map_true);
 	free(line);
 }
 
-void	wall_control(void)
+void	wall_control(t_win *win)
 {
 	int		start;
 	int		last;
@@ -164,10 +119,10 @@ void	wall_control(void)
 		}
 	}
 	if(win->mapp->map_true == 1)
-		map_wall_control();
+		map_wall_control(win);
 }
 
-void	read_map(char *maps)
+void	read_map(char *maps, t_win *win)
 {
 	int		fd;
 
@@ -177,7 +132,7 @@ void	read_map(char *maps)
 		win->mapp->fd = fd;
 		if (fd < 0)
 			ft_printf("Invalid map");
-		map_argv();
+		map_argv(win);
 		close(fd);
 	}
 	else
