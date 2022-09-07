@@ -6,63 +6,26 @@
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:10:38 by ycanga            #+#    #+#             */
-/*   Updated: 2022/09/02 16:52:14 by ycanga           ###   ########.fr       */
+/*   Updated: 2022/09/07 12:55:31 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	map_argv_control(t_win *win)
+void	read_map(char *maps, t_win *win)
 {
-	int		i;
-	int		j;
-	char	**map;
-
-	map = win->mapp->map;
-	i = 0;
-	while (i < win->mapp->height)
+	int		fd;
+	if (maps)
 	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == 'E')
-				win->mapp->exit +=1;
-			if (map[i][j] == 'P')
-				win->mapp->player +=1;
-			if (map[i][j] == 'C')
-				win->mapp->collect +=1;
-			
-			j++;
-		}
-		i++;
+		fd = open(maps, O_RDONLY);
+		win->mapp->fd = fd;
+		if (fd < 0)
+			ft_printf("File Not Found. !");
+		map_argv(win);
+		close(fd);
 	}
-	ft_printf("exit: %d ", win->mapp->exit);
-	ft_printf("player: %d ", win->mapp->player);
-	ft_printf("collect: %d ", win->mapp->collect);
-} 
-
-void	map_wall_control(t_win *win)
-{
-	int		last_char;
-	int		map_height;
-	char	**map_char;
-	
-	map_height = win->mapp->height;
-	last_char = win->mapp->width - 1;
-	map_char = win->mapp->map;
-	while (last_char > 0)
-	{
-		if (map_char[0][last_char] == '1' \
-			 && map_char[map_height-1][last_char] == '1')
-			win->mapp->map_true = 1;
-		else
-		{
-			win->mapp->map_true = 0;
-			break;
-		}
-		last_char--;
-	}
-	map_argv_control(win);
+	else
+		ft_printf("Error Maps");
 }
 
 void	map_argv(t_win *win)
@@ -74,26 +37,24 @@ void	map_argv(t_win *win)
 	i = 0;
 	line = get_next_line(win->mapp->fd);
 	if (line == 0)
-		ft_printf("Invalid map size");
+		ft_error(win, 1);
 	win->mapp->width = ft_strlen(line) - 1;
 	count = 0;
 	while (line)
 	{
 		win->mapp->map[i] = ft_calloc(win->mapp->width, 1);
 		ft_strlcpy(win->mapp->map[i], line, (int)ft_strlen(line) + 1);
-		if ((int)ft_strlen(win->mapp->map[i] ) - 1 != win->mapp->width)
-		{
-			ft_printf("Map Error.\n");
-			break;
-		}
+		if ((int)ft_strlen(win->mapp->map[i]) - 1 != win->mapp->width)
+			ft_error(win, 0);
 		free(line);
 		line = get_next_line(win->mapp->fd);
 		count++;
 		i++;
 	}
+	win->mapp->map[i] = NULL;
 	win->mapp->height = count;
-	wall_control(win);
 	free(line);
+	wall_control(win);
 }
 
 void	wall_control(t_win *win)
@@ -114,26 +75,60 @@ void	wall_control(t_win *win)
 		{
 			ft_printf("Map error.\t");
 			win->mapp->map_true = 0;
-			break;
+			break ;
 		}
 	}
-	if(win->mapp->map_true == 1)
+	if (win->mapp->map_true == 1)
 		map_wall_control(win);
 }
 
-void	read_map(char *maps, t_win *win)
+void	map_wall_control(t_win *win)
 {
-	int		fd;
+	int		last_char;
+	int		map_height;
+	char	**map_char;
 
-	if (maps)
+	map_height = win->mapp->height;
+	last_char = win->mapp->width - 1;
+	map_char = win->mapp->map;
+	while (last_char > 0)
 	{
-		fd = open(maps, O_RDONLY);
-		win->mapp->fd = fd;
-		if (fd < 0)
-			ft_printf("Invalid map");
-		map_argv(win);
-		close(fd);
+		if (map_char[0][last_char] == '1' \
+		&& map_char[map_height - 1][last_char] == '1')
+			win->mapp->map_true = 1;
+		else
+		{
+			win->mapp->map_true = 0;
+			break ;
+		}
+		last_char--;
 	}
-	else
-		ft_printf("Error Maps");
+	map_argv_control(win);
+}
+
+void	map_argv_control(t_win *win)
+{
+	int		i;
+	int		j;
+	char	**map;
+
+	map = win->mapp->map;
+	i = 0;
+	while (i < win->mapp->height)
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'E')
+				win->mapp->exit += 1;
+			if (map[i][j] == 'P')
+				win->mapp->player += 1;
+			if (map[i][j] == 'C')
+				win->mapp->collect += 1;
+			j++;
+		}
+		i++;
+	}
+	argv_control(win);
+	// map_valid_control(win);
 }
