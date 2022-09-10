@@ -6,7 +6,7 @@
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:58:57 by ycanga            #+#    #+#             */
-/*   Updated: 2022/09/07 12:08:32 by ycanga           ###   ########.fr       */
+/*   Updated: 2022/09/10 12:53:53 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ typedef struct s_mlx
 	void	*wall;
 	void	*bg;
 	void	*coll;
-	int		size;
+	int		size_x;
+	int		size_y;
 	int		x;
 	int		y;
 }t_mlx;
@@ -72,5 +73,7 @@ void	free_data(t_win *win);
 void	argv_control(t_win *win);
 void	map_valid_control(t_win *win);
 int		ber_control(char *av);
+void	mlx_put_image(t_win *win);
+void	map_argv_put(t_win *win);
 
 #endif

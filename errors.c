@@ -6,7 +6,7 @@
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 00:52:39 by ycanga            #+#    #+#             */
-/*   Updated: 2022/09/07 12:48:30 by ycanga           ###   ########.fr       */
+/*   Updated: 2022/09/10 11:06:59 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,39 +17,39 @@ int	ber_control(char *av)
 	int		av_length;
 
 	av_length = ft_strlen(av);
-	if (av_length > 4 && av[av_length - 4] == '.' && av[av_length - 3] == 'b' && av[av_length - 2] == 'e' && av[av_length - 1] == 'r')
+	if (av_length > 4 && av[av_length - 4] == '.' && av[av_length - 3] == 'b'\
+	&& av[av_length - 2] == 'e' && av[av_length - 1] == 'r')
 		return (1);
 	else
 	{
-		ft_printf("\nPlease use only '.ber' files. !\n");
+		ft_printf("\n\033[31mPlease use only '.ber' files. !\n");
 		exit(0);
 	}
 }
 
 void	ft_error(t_win *win, int a)
 {
-	if(a == 0)
+	if (a == 0)
 	{
-		ft_printf("Map Error. !\n");
+		ft_printf("\033[31mMap Error. !\n");
 		exit(0);
 	}
-	if(a == 1)
+	if (a == 1)
 	{
-		ft_printf("Invalid Map Size. !\n");
+		ft_printf("\033[31mInvalid Map Size. !\n");
 		exit(0);
 	}
 	if (a == 2)
 	{
-		ft_printf("Argument Error. !\n");
+		ft_printf("\033[31mArgument Error. !\n");
 		exit(0);
 	}
-	
 	free_data(win);
 }
 
 void	free_data(t_win *win)
 {
-	int y;
+	int	y;
 
 	y = 0;
 	free(win->mapp);

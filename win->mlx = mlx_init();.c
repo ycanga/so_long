@@ -1,0 +1,13 @@
+	win->mlx = mlx_init();
+		win->win = mlx_new_window(win->mlx, 1920, 1080, "Ateş ve Su");
+ 		win->mlxx->chr = mlx_xpm_file_to_image(win->mlx, "./xpm/ates.xpm", &win->mlxx->x, &win->mlxx->x);ft_printf("hello");
+		win->mlxx->ext = mlx_xpm_file_to_image(win->mlx, "./xpm/su.xpm", &win->mlxx->x, &win->mlxx->x);
+		win->mlxx->coll = mlx_xpm_file_to_image(win->mlx, "./xpm/heart.xpm", &win->mlxx->x, &win->mlxx->x);
+		win->mlxx->wall = mlx_xpm_file_to_image(win->mlx, "./xpm/wall.xpm", &win->mlxx->x, &win->mlxx->x);
+		win->mlxx->bg = mlx_xpm_file_to_image(win->mlx, "./xpm/bg.xpm", &win->mlxx->x, &win->mlxx->x); 
+		mlx_put_image_to_window(win->mlx, win->win, win->mlxx->chr, 50, 50);
+		mlx_put_image_to_window(win->mlx, win->win, win->mlxx->ext, 100, 100);
+		mlx_put_image_to_window(win->mlx, win->win, win->mlxx->coll, 150, 150);
+		mlx_put_image_to_window(win->mlx, win->win, win->mlxx->wall, 200, 200);
+		mlx_put_image_to_window(win->mlx, win->win, win->mlxx->bg, 300, 300); 
+		mlx_loop(win->mlx);
