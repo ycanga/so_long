@@ -26,6 +26,7 @@ clean:
 	@printf '\033[31m Dosyalar Silindi. !'
 
 fclean:
+	@printf '\033[31m'
 	@rm -rf $(OBJS) $(NAME)
 	@rm -rf ./gnl/*.o
 	@make clean -C ./mlx

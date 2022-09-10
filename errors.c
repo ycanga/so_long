@@ -6,7 +6,7 @@
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 00:52:39 by ycanga            #+#    #+#             */
-/*   Updated: 2022/09/10 11:06:59 by ycanga           ###   ########.fr       */
+/*   Updated: 2022/09/10 18:01:43 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,5 @@ void	free_data(t_win *win)
 	free(win->mapp);
 	free(win->mlxx);
 	free(win);
-	system("Leaks so_long");
 	exit(0);
 }

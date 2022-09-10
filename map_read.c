@@ -6,7 +6,7 @@
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:10:38 by ycanga            #+#    #+#             */
-/*   Updated: 2022/09/10 11:08:28 by ycanga           ###   ########.fr       */
+/*   Updated: 2022/09/10 18:27:20 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	read_map(char *maps, t_win *win)
 {
 	int		fd;
+
 	if (maps)
 	{
 		fd = open(maps, O_RDONLY);
@@ -24,7 +25,7 @@ void	read_map(char *maps, t_win *win)
 		map_argv(win);
 		close(fd);
 	}
-	else 
+	else
 		ft_printf("\033[31mError Maps\n");
 }
 
@@ -130,5 +131,4 @@ void	map_argv_control(t_win *win)
 		i++;
 	}
 	argv_control(win);
-	// map_valid_control(win);
 }
