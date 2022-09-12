@@ -6,7 +6,7 @@
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:54:27 by ycanga            #+#    #+#             */
-/*   Updated: 2022/09/10 18:01:40 by ycanga           ###   ########.fr       */
+/*   Updated: 2022/09/12 13:09:04 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ void	argv_add_st(t_win *win)
 	win->mlxx->chr = mlx_xpm_file_to_image(win->mlx, \
 "./xpm/ates.xpm", &win->mlxx->x, &win->mlxx->y);
 	win->mlxx->chr_r = mlx_xpm_file_to_image(win->mlx, \
-	"./xpm/ates.xpm", &win->mlxx->x, &win->mlxx->y);
+"./xpm/ates.xpm", &win->mlxx->x, &win->mlxx->y);
 	win->mlxx->chr_l = mlx_xpm_file_to_image(win->mlx, \
-	"./xpm/ates.xpm", &win->mlxx->x, &win->mlxx->y);
+"./xpm/ates.xpm", &win->mlxx->x, &win->mlxx->y);
 	win->mlxx->chr_b = mlx_xpm_file_to_image(win->mlx, \
-	"./xpm/ates.xpm", &win->mlxx->x, &win->mlxx->y);
+"./xpm/ates.xpm", &win->mlxx->x, &win->mlxx->y);
 	win->mlxx->coll = mlx_xpm_file_to_image(win->mlx, \
 "./xpm/heart.xpm", &win->mlxx->x, &win->mlxx->y);
 }
 
-void	map_argv_put(t_win *win)
+void	map_argv_put(t_win *win) // buraya yollanacak yeni map
 {
 	int		i;
 	char	**map;
@@ -78,6 +78,7 @@ void	put_if_else(t_win *win, int i, int j, int c)
 {
 	char	**map;
 
+	win->mlxx->chr_pos = win->mlxx->chr;
 	map = win->mapp->map;
 	if (map[i][j] == '1')
 		put_argv(win, win->mlxx->wall, win->mlxx->size_x, c);
@@ -86,7 +87,7 @@ void	put_if_else(t_win *win, int i, int j, int c)
 	else if (map[i][j] == 'E')
 		put_argv(win, win->mlxx->ext, win->mlxx->size_x, c);
 	else if (map[i][j] == 'P')
-		put_argv(win, win->mlxx->chr, win->mlxx->size_x, c);
+		put_argv(win, win->mlxx->chr_pos, win->mlxx->size_x, c);
 	else if (map[i][j] == 'C')
 		put_argv(win, win->mlxx->coll, win->mlxx->size_x, c);
 }

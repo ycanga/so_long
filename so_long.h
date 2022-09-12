@@ -6,7 +6,7 @@
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:58:57 by ycanga            #+#    #+#             */
-/*   Updated: 2022/09/10 21:26:36 by ycanga           ###   ########.fr       */
+/*   Updated: 2022/09/12 13:10:57 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,15 @@ typedef struct s_map
 	int		map_true;
 	int		fd;
 	int		collect_count;
+	int		exit_count;
 	char	**map_control;
-	int		exit_i;
-	int		exit_c;
-	int		collect_i;
-	int		collect_c;
 	int		player_i;
-	int		player_c;
+	int		player_j;
 }t_map;
 
 typedef struct s_mlx
 {
+	void	*chr_pos;
 	void	*chr;
 	void	*chr_r;
 	void	*chr_l;
@@ -71,9 +69,10 @@ void	map_wall_control(t_win *win);
 void	map_argv(t_win *win);
 void	map_argv_control(t_win *win);
 void	ft_error(t_win *win, int a);
-void	free_data(t_win *win);
+int		free_data(t_win *win);
 void	argv_control(t_win *win);
-void	map_valid_control(t_win *win);
+void	argv_env_control_2(t_win *win, int i, int j);
+void	argv_env_control(t_win *win);
 int		ber_control(char *av);
 void	mlx_put_image(t_win *win);
 void	map_argv_put(t_win *win);
@@ -81,5 +80,6 @@ void	put_if_else(t_win *win, int i, int j, int c);
 int		ft_key(int keycode, t_win *win);
 void	valid_map_control(t_win *win, int i, int j);
 void	valid_map_control_2(t_win *win, int i, int j);
+void	move_up(t_win *win);
 
 #endif

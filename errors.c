@@ -6,7 +6,7 @@
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 00:52:39 by ycanga            #+#    #+#             */
-/*   Updated: 2022/09/10 18:01:43 by ycanga           ###   ########.fr       */
+/*   Updated: 2022/09/12 03:46:12 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,15 @@ void	ft_error(t_win *win, int a)
 	free_data(win);
 }
 
-void	free_data(t_win *win)
+int	free_data(t_win *win)
 {
 	int	y;
 
 	y = 0;
+	free(win->mapp->valid_map);
 	free(win->mapp);
 	free(win->mlxx);
 	free(win);
 	exit(0);
+	return (0);
 }

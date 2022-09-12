@@ -6,7 +6,7 @@
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:37:01 by ycanga            #+#    #+#             */
-/*   Updated: 2022/09/10 19:39:03 by ycanga           ###   ########.fr       */
+/*   Updated: 2022/09/12 13:10:45 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@ int	ft_key(int keycode, t_win *win)
 {
 	if (keycode == 53)
 		free_data(win);
+	if (keycode == 13)
+		move_up(win);
+	// if (keycode == 0)
+	// 	move_left(win);
+	// if (keycode == 1)
+	// 	move_down(win);
+	// if (keycode == 2)
+	// 	move_right(win);
 	return (keycode);
 }
 
@@ -34,6 +42,7 @@ int	main(int ac, char **av)
 		read_map(av[1], win);
 		mlx_put_image(win);
 		mlx_hook(win->win, 2, 1L << 0, ft_key, win);
+		mlx_hook(win->win, 17, 0, free_data, win);
 		mlx_loop(win->mlx);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:10:38 by ycanga            #+#    #+#             */
-/*   Updated: 2022/09/10 18:27:20 by ycanga           ###   ########.fr       */
+/*   Updated: 2022/09/12 13:18:58 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,22 +113,25 @@ void	map_argv_control(t_win *win)
 	int		j;
 	char	**map;
 
+	win->mapp->exit = 0;
 	map = win->mapp->map;
-	i = 0;
-	while (i < win->mapp->height)
+	i = -1;
+	while (++i < win->mapp->height)
 	{
-		j = 0;
-		while (map[i][j])
+		j = -1;
+		while (map[i][++j])
 		{
 			if (map[i][j] == 'E')
 				win->mapp->exit += 1;
 			if (map[i][j] == 'P')
+			{
+				win->mapp->player_i = i;
+				win->mapp->player_j = j;
 				win->mapp->player += 1;
+			}
 			if (map[i][j] == 'C')
 				win->mapp->collect += 1;
-			j++;
 		}
-		i++;
 	}
 	argv_control(win);
 }
