@@ -6,7 +6,7 @@
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:58:57 by ycanga            #+#    #+#             */
-/*   Updated: 2022/09/12 13:10:57 by ycanga           ###   ########.fr       */
+/*   Updated: 2022/09/13 21:27:50 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ typedef struct s_map
 	int		fd;
 	int		collect_count;
 	int		exit_count;
-	char	**map_control;
+	char	*count;
+	int		walk_count;
 	int		player_i;
 	int		player_j;
 }t_map;
@@ -73,13 +74,21 @@ int		free_data(t_win *win);
 void	argv_control(t_win *win);
 void	argv_env_control_2(t_win *win, int i, int j);
 void	argv_env_control(t_win *win);
-int		ber_control(char *av);
+void	ber_control(char *av, t_win *win);
 void	mlx_put_image(t_win *win);
 void	map_argv_put(t_win *win);
 void	put_if_else(t_win *win, int i, int j, int c);
 int		ft_key(int keycode, t_win *win);
 void	valid_map_control(t_win *win, int i, int j);
 void	valid_map_control_2(t_win *win, int i, int j);
+void	walk(t_win *win, int keycode);
 void	move_up(t_win *win);
+void	move_down(t_win *win);
+void	move_left(t_win *win);
+void	move_right(t_win *win);
+int		xpm_control(void);
+int		xpm_control_2(void);
+void	score(t_win *win);
+void	argv_add_st(t_win *win);
 
 #endif

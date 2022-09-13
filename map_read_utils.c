@@ -6,7 +6,7 @@
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:30:03 by ycanga            #+#    #+#             */
-/*   Updated: 2022/09/12 12:36:10 by ycanga           ###   ########.fr       */
+/*   Updated: 2022/09/13 18:56:39 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	valid_map_control(t_win *win, int i, int j)
 	if (win->mapp->valid_map[i][j] != '1')
 	{
 		if (win->mapp->valid_map[i][j] != 'E')
-		{
+		{	
 			if (win->mapp->valid_map[i][j] == 'C')
 				win->mapp->collect_count--;
 			win->mapp->valid_map[i][j] = 'x';
@@ -46,7 +46,7 @@ void	valid_map_copy(t_win *win, int i, int j)
 	a = 0;
 	while (a < win->mapp->height)
 	{	
-		win->mapp->valid_map[a] = ft_calloc(ft_strlen(win->mapp->map[a]), 1);
+		win->mapp->valid_map[a] = ft_calloc(win->mapp->width, 1);
 		ft_strlcpy(win->mapp->valid_map[a], \
 		win->mapp->map[a], win->mapp->width + 1);
 		a++;
@@ -55,7 +55,7 @@ void	valid_map_copy(t_win *win, int i, int j)
 	win->mapp->collect_count = win->mapp->collect;
 	valid_map_control(win, i, j);
 	if (win->mapp->collect_count != 0 || win->mapp->exit_count != 0)
-		ft_error(win, 2);
+		ft_error(win, 3);
 }
 
 void	argv_env_control_2(t_win *win, int i, int j)

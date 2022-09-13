@@ -6,7 +6,7 @@
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:10:38 by ycanga            #+#    #+#             */
-/*   Updated: 2022/09/12 13:18:58 by ycanga           ###   ########.fr       */
+/*   Updated: 2022/09/13 21:18:02 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	read_map(char *maps, t_win *win)
 		fd = open(maps, O_RDONLY);
 		win->mapp->fd = fd;
 		if (fd < 0)
-			ft_printf("\033[31mFile Not Found. !\n");
+			ft_error(win, 7);
 		map_argv(win);
 		close(fd);
 	}
@@ -52,8 +52,8 @@ void	map_argv(t_win *win)
 		count++;
 		i++;
 	}
-	win->mapp->map[i] = NULL;
 	win->mapp->height = count;
+	win->mapp->valid_map = ft_calloc(sizeof(char *) * win->mapp->height, 1);
 	free(line);
 	wall_control(win);
 }
@@ -74,9 +74,8 @@ void	wall_control(t_win *win)
 			win->mapp->map_true = 1;
 		else
 		{
-			ft_printf("\033[31mMap error.\t");
 			win->mapp->map_true = 0;
-			break ;
+			ft_error(win, 0);
 		}
 	}
 	if (win->mapp->map_true == 1)
@@ -100,7 +99,7 @@ void	map_wall_control(t_win *win)
 		else
 		{
 			win->mapp->map_true = 0;
-			break ;
+			ft_error(win, 0);
 		}
 		last_char--;
 	}

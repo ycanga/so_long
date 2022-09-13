@@ -1,9 +1,9 @@
 CFLAGS = -Wall -Wextra -Werror -I./mlx -g
-LFLAGS = -framework AppKit -framework OpenGL -L./mlx -lmlx
+LFLAGS = -framework AppKit -framework OpenGL -L./mlx -lmlx 
 MLX = ./mlx/libmlx.a
 GNL = $(wildcard gnl/*c)
 GNLOBJS = $(GNL:.c=.o)
-SRCS = main.c	map_read.c	errors.c	map_read_utils.c	mlx_put.c	walk.c
+SRCS = main.c	map_read.c	errors.c	map_read_utils.c	mlx_put.c	walk.c	xpm_file_control.c
 OBJS = $(SRCS:.c=.o)
 NAME = so_long
 
