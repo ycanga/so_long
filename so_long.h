@@ -6,7 +6,7 @@
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:58:57 by ycanga            #+#    #+#             */
-/*   Updated: 2022/09/13 21:27:50 by ycanga           ###   ########.fr       */
+/*   Updated: 2022/09/16 17:33:38 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,10 @@ void	mlx_put_image(t_win *win);
 void	map_argv_put(t_win *win);
 void	put_if_else(t_win *win, int i, int j, int c);
 int		ft_key(int keycode, t_win *win);
+void	valid_map_copy(t_win *win, int i, int j);
 void	valid_map_control(t_win *win, int i, int j);
 void	valid_map_control_2(t_win *win, int i, int j);
+void	put_argv(t_win *win, void	*argv, int z, int c);
 void	walk(t_win *win, int keycode);
 void	move_up(t_win *win);
 void	move_down(t_win *win);

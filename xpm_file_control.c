@@ -6,7 +6,7 @@
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 23:39:49 by ycanga            #+#    #+#             */
-/*   Updated: 2022/09/13 02:06:04 by ycanga           ###   ########.fr       */
+/*   Updated: 2022/09/16 17:46:27 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	xpm_control(void)
 	if (fd_chr <= 0 || fd_chr_r <= 0 || fd_chr_l <= 0 || fd_chr_b <= 0)
 		return (0);
 	else
-		return (6);
+		return (1);
 	close(fd_chr);
 	close(fd_chr_r);
 	close(fd_chr_l);
@@ -47,8 +47,7 @@ int	xpm_control_2(void)
 	if (fd_ext <= 0 || fd_wall <= 0 || fd_bg <= 0 || fd_coll <= 0)
 		return (0);
 	else
-		return (6);
-
+		return (1);
 	close(fd_ext);
 	close(fd_wall);
 	close(fd_bg);

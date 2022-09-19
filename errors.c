@@ -6,19 +6,19 @@
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 00:52:39 by ycanga            #+#    #+#             */
-/*   Updated: 2022/09/13 21:27:37 by ycanga           ###   ########.fr       */
+/*   Updated: 2022/09/16 16:16:09 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long.h" 
 
 void	ber_control(char *av, t_win *win)
 {
 	int	i;
 
 	i = ft_strlen(av);
-	if (i < 5 || (av[i - 1] != 'r' && av[i - 2] != 'e' && av[i - 3] != 'b' \
-	&& av[i - 4] != '.'))
+	if (i < 5 || (av[i - 1] != 'r' || av[i - 2] != 'e' || av[i - 3] != 'b' \
+	|| av[i - 4] != '.'))
 		ft_error(win, 4);
 }
 
@@ -29,13 +29,13 @@ void	ft_error(t_win *win, int a)
 	if (a == 1)
 		ft_printf("\033[31mInvalid Map Size. !\n");
 	if (a == 2)
-		ft_printf("\033[31mArgument Error. !\n");
+		ft_printf("\033[31mMap Argument Error. !\n");
 	if (a == 3)
-		ft_printf("\033[31mValid Map Error. !\n");
+		ft_printf("\033[31mValid Path Error. !\n");
 	if (a == 4)
-		ft_printf("\n\033[31mPlease use only '.ber' files. !\n");
+		ft_printf("\033[31mPlease use only '.ber' files. !\n");
 	if (a == 7)
-		ft_printf("\033[31mFile Not Found. !\n");	
+		ft_printf("\033[31mFile Not Found. !\n");
 	free_data(win);
 	exit(EXIT_FAILURE);
 }

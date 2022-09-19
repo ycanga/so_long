@@ -6,7 +6,7 @@
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:10:38 by ycanga            #+#    #+#             */
-/*   Updated: 2022/09/13 21:18:02 by ycanga           ###   ########.fr       */
+/*   Updated: 2022/09/16 16:30:33 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,15 @@ void	read_map(char *maps, t_win *win)
 	if (maps)
 	{
 		fd = open(maps, O_RDONLY);
-		win->mapp->fd = fd;
 		if (fd < 0)
 			ft_error(win, 7);
+		else
+			win->mapp->fd = fd;
 		map_argv(win);
 		close(fd);
 	}
 	else
-		ft_printf("\033[31mError Maps\n");
+		ft_error(win, 0);
 }
 
 void	map_argv(t_win *win)

@@ -6,7 +6,7 @@
 /*   By: ycanga <ycanga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:37:01 by ycanga            #+#    #+#             */
-/*   Updated: 2022/09/13 20:52:00 by ycanga           ###   ########.fr       */
+/*   Updated: 2022/09/16 16:14:40 by ycanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ void	score(t_win *win)
 int	ft_key(int keycode, t_win *win)
 {
 	if (keycode == 53)
+	{
+		ft_printf("\033[31mExited game. !\n");
 		free_data(win);
+	}
 	else
 		walk(win, keycode);
 	return (keycode);
